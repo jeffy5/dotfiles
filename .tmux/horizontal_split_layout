@@ -1,0 +1,2 @@
+selectp -t 0                               # Choose the first window(window 0)
+splitw -h -p 20 -c "#{pane_current_path}"  # Horizontal split 
