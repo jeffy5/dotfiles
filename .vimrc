@@ -57,13 +57,17 @@ inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
 
 vnoremap <Leader>y "+y
-nmap <Leader>p "+p
-nmap <F2> :!ici <C-R><C-W><CR>
-nmap <Leader><Leader> :
+nnoremap <Leader>p "+p
+nnoremap <F2> :!ici <C-R><C-W><CR>
+nnoremap <Leader><Leader> :
 
 autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb,*.vue set tabstop=2 softtabstop=2 shiftwidth=2 
-autocmd BufNewFile,BufRead *.py nmap <C-c><C-c> :w<Enter>:!python3 %<CR>
-autocmd BufNewFile,BufRead *.rb nmap <C-c><C-c> :w<Enter>:!ruby %<CR>
+autocmd BufNewFile,BufRead *.py nmap <leader>r :w<Enter>:!python3 %<CR>
+autocmd BufNewFile,BufRead *.go nmap <leader>r :w<Enter>:!go run %<CR>
+autocmd BufNewFile,BufRead *.rb nmap <leader>r :w<Enter>:!ruby %<CR>
+autocmd BufNewFile,BufRead *.js nmap <leader>r :w<Enter>:!node %<CR>
+autocmd BufNewFile,BufRead *.vue set filetype=html 
+autocmd BufNewFile,BufRead *.vue,*.html syntax sync fromstart 
 
 "function ClosePair(char)
     "if getline('.')[col('.') - 1] == a:char
@@ -103,12 +107,12 @@ filetype plugin indent on
 
 " Emmet html标签快速生成
 Plugin 'mattn/emmet-vim'
-let g:user_emmet_mode = 'i'
-" let g:user_emmet_expandabbr_key = '<C-y><TAB>'
-let g:user_emmet_next_key = '<C-d>'
-let g:user_emmet_prev_key = '<C-t>'
-let g:user_emmet_install_global = 1
-imap <expr> <C-f> emmet#expandAbbrIntelligent("\<tab>")
+let g:user_emmet_mode='i'
+"let g:user_emmet_expandabbr_key='<Tab>'
+let g:user_emmet_next_key='<C-d>'
+let g:user_emmet_prev_key='<C-t>'
+let g:user_emmet_install_global=1
+imap <expr> <C-l> emmet#expandAbbrIntelligent("\<tab>")
 
 " NERDTree目录树插件
 Plugin 'scrooloose/nerdtree'
@@ -141,11 +145,11 @@ Plugin 'godlygeek/tabular'
 Plugin 'Valloric/YouCompleteMe'
 
 " YouCompleteMe补全配置
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 " 修改ycm按键
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " 配置成像一样IDE
 set completeopt=longest,menu
 " 退出insert模式后自动隐藏补全提示框
@@ -157,6 +161,8 @@ inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
+
+"let g:ycm_auto_trigger=1
 
 " 重命名文件
 Plugin 'danro/rename.vim'
@@ -171,11 +177,11 @@ let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 
 " Vue高亮
-Plugin 'posva/vim-vue'
+" Plugin 'posva/vim-vue'
 
 " 识别vue文件进行高亮
-autocmd BufNewFile,BufRead *.vue set filetype=vue 
-autocmd FileType vue syntax sync fromstart
+" autocmd BufNewFile,BufRead *.vue set filetype=vue 
+" autocmd FileType vue syntax sync fromstart
 
 " 全局搜索
 Plugin 'dyng/ctrlsf.vim' 
@@ -215,9 +221,9 @@ Plugin 'pbrisbin/vim-mkdir'
 " ctags config, code jump
 autocmd BufNewFile,BufRead *.rb set tags+=/home/wjh/.rvm/gems/ruby-2.3.0/gems/tags
 autocmd BufNewFile,BufRead *.py set tags+=/usr/local/lib/python3.5/dist-packages/tags
-nmap <Leader>vn :vsp<C-]>
+nmap <Leader>vn :vsp<cr><C-]>
 nmap <Leader>n <C-]>
-nmap <Leader>vN :vspg]
+nmap <Leader>vN :vsp<cr>g]
 nmap <Leader>N g]
 
 " Ack.vim, Global search
@@ -243,3 +249,26 @@ let g:ack_use_cword_for_empty_search = 1
 Plugin 'junegunn/vim-easy-align'
 xmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
+
+" git diff check
+Plugin 'airblade/vim-gitgutter'
+
+" Vim org-mode
+Plugin 'jceb/vim-orgmode'
+autocmd BufNewFile,BufRead *.org set filetype=org
+
+" Use <C-a> to create the date
+Plugin 'tpope/vim-speeddating'
+
+"Plugin 'python-mode/python-mode'
+"let g:pymode_lint_cwindow = 0
+
+Plugin 'w0rp/ale'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_lint_on_text_changed = 'never'
+let g:syntastic_javascript_checkers = ['eslint']
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0    " Allow JSX in normal JS files
