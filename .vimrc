@@ -30,6 +30,13 @@ set nocompatible
 set wildmenu
 set ruler
 
+" % match
+set mps+=（:）
+
+" iabbrev
+iabbrev ff fsociety
+iabbrev @@ 876531737@qq.com
+
 " Disable the leader key in insert mode, or there will be a second pause when you
 " press leader key. Use `verbose imap <leader>` to check whick key bind in the
 " insert mode with leader key, just ban it.
@@ -37,65 +44,65 @@ let mapleader=" "
 
 " 清屏并去掉高亮
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" 一些基本的映射
+nnoremap <F2> :!ici <C-R><C-W><CR>
 nnoremap <C-c> <C-[>
 
-" 括号自动匹配
-"inoremap ( ()<Esc>i
-"inoremap [ []<Esc>i
-"inoremap { {}<Esc>i
-"inoremap ) <c-r>=ClosePair(')')<CR>
-"inoremap ] <c-r>=ClosePair(']')<CR>
-"inoremap } <c-r>=ClosePair('}')<CR>
-"inoremap " <c-r>=QuoteDelim('"')<CR>
-"inoremap ' <c-r>=QuoteDelim("'")<CR>
-"inoremap <TAB> <c-r>=SkipPair()<CR>
-
+" Emacs 的便利按键习惯，insert 模式下的短距离跳转
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-a> <ESC>I
 inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
-
+ 
+" Leader 的按键绑定
 vnoremap <Leader>y "+y
 nnoremap <Leader>p "+p
-nnoremap <F2> :!ici <C-R><C-W><CR>
 nnoremap <Leader><Leader> :
+nnoremap <Leader>ve :vsp $VIMRC<Enter>
+nnoremap <Leader>vr :source $VIMRC<Enter>
 
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb,*.vue set tabstop=2 softtabstop=2 shiftwidth=2 
-autocmd BufNewFile,BufRead *.py nmap <leader>r :w<Enter>:!python3 %<CR>
-autocmd BufNewFile,BufRead *.go nmap <leader>r :w<Enter>:!go run %<CR>
-autocmd BufNewFile,BufRead *.rb nmap <leader>r :w<Enter>:!ruby %<CR>
-autocmd BufNewFile,BufRead *.js nmap <leader>r :w<Enter>:!node %<CR>
-autocmd BufNewFile,BufRead *.vue set filetype=html 
-autocmd BufNewFile,BufRead *.vue,*.html syntax sync fromstart 
+" ctags config, code jump
+nnoremap <Leader>vn :vsp<Enter><C-]>
+nnoremap <Leader>n <C-]>
+nnoremap <Leader>vN :vsp<Enter>g]
+nnoremap <Leader>N g]
 
-"function ClosePair(char)
-    "if getline('.')[col('.') - 1] == a:char
-        "return "\<Right>"
-    "else
-        "return a:char
-    "endif
-"endf
+" Auto cmd group
+augroup filetype_html
+    autocmd!
+    autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb,*.vue set tabstop=2 softtabstop=2 shiftwidth=2 
+augroup END
 
-"function QuoteDelim(char)
-    "let line = getline('.')
-    "let col = col('.')
-    "if line[col - 2] == "\\"
-        "return a:char
-    "elseif line[col - 1] == a:char
-        "return "\<Right>"
-    "else
-        "return a:char.a:char."\<Esc>i"
-    "endif
-"endf
+augroup filetype_python
+    autocmd!
+    autocmd BufNewFile,BufRead *.py nnoremap <leader>r :w<Enter>:!python3 %<CR>
+    autocmd BufNewFile,BufRead *.py set tags+=/usr/local/lib/python3.5/dist-packages/tags
+augroup END
 
-"function SkipPair()  
-    "if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'"
-        "return "\<ESC>la"  
-    "else  
-        "return "\t"  
-    "endif  
-"endf
+augroup filetype_ruby
+    autocmd!
+    autocmd BufNewFile,BufRead *.rb nnoremap <leader>r :w<Enter>:!ruby %<CR>
+    autocmd BufNewFile,BufRead *.rb set tags+=/home/wjh/.rvm/gems/ruby-2.3.0/gems/tags
+augroup END
+
+augroup filetype_go
+    autocmd!
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run %<CR>
+    autocmd BufNewFile,BufRead *.go set tags+=/home/wjh/.go-lib/src/tags
+augroup END
+
+augroup filetype_javscript
+    autocmd!
+    autocmd BufNewFile,BufRead *.js nmap <leader>r :w<Enter>:!node %<CR>
+augroup END
+
+augroup filetype_vue
+    autocmd!
+    autocmd BufNewFile,BufRead *.vue set filetype=html 
+    autocmd BufNewFile,BufRead *.vue,*.html syntax sync fromstart 
+augroup END
 
 " Vundle管理插件
 filetype off
@@ -107,16 +114,16 @@ filetype plugin indent on
 
 " Emmet html标签快速生成
 Plugin 'mattn/emmet-vim'
-let g:user_emmet_mode='i'
-"let g:user_emmet_expandabbr_key='<Tab>'
-let g:user_emmet_next_key='<C-d>'
-let g:user_emmet_prev_key='<C-t>'
-let g:user_emmet_install_global=1
+let g:user_emmet_mode = 'i'
+" let g:user_emmet_expandabbr_key = '<C-y><TAB>'
 imap <expr> <C-l> emmet#expandAbbrIntelligent("\<tab>")
+let g:user_emmet_next_key = '<C-d>'
+let g:user_emmet_prev_key = '<C-t>'
+let g:user_emmet_install_global = 1
 
 " NERDTree目录树插件
 Plugin 'scrooloose/nerdtree'
-nmap <F4> :NERDTree  <CR>
+nnoremap <F4> :NERDTree<CR>
 let g:NERDTreeWinPos="left"
 let g:NERDTreeWinSize=20
 let g:NERDTreeShowLineNumbers=1
@@ -145,11 +152,11 @@ Plugin 'godlygeek/tabular'
 Plugin 'Valloric/YouCompleteMe'
 
 " YouCompleteMe补全配置
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
 " 修改ycm按键
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " 配置成像一样IDE
 set completeopt=longest,menu
 " 退出insert模式后自动隐藏补全提示框
@@ -161,8 +168,6 @@ inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
-
-"let g:ycm_auto_trigger=1
 
 " 重命名文件
 Plugin 'danro/rename.vim'
@@ -176,12 +181,14 @@ Plugin 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 
-" Vue高亮
-" Plugin 'posva/vim-vue'
-
+" Vue
+Plugin 'posva/vim-vue'
 " 识别vue文件进行高亮
-" autocmd BufNewFile,BufRead *.vue set filetype=vue 
-" autocmd FileType vue syntax sync fromstart
+augroup filetype_vue
+    autocmd!
+    autocmd BufNewFile,BufRead *.vue set filetype=vue 
+    autocmd BufNewFile,BufRead *.vue syntax sync fromstart
+augroup END
 
 " 全局搜索
 Plugin 'dyng/ctrlsf.vim' 
@@ -209,7 +216,7 @@ Plugin 'marijnh/tern_for_vim'
 
 " Tagbar
 Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " Powerline
 Plugin 'Lokaltog/vim-powerline'
@@ -217,14 +224,6 @@ set laststatus=2
 
 " Mkdir the dependency directories when you create a file
 Plugin 'pbrisbin/vim-mkdir'
-
-" ctags config, code jump
-autocmd BufNewFile,BufRead *.rb set tags+=/home/wjh/.rvm/gems/ruby-2.3.0/gems/tags
-autocmd BufNewFile,BufRead *.py set tags+=/usr/local/lib/python3.5/dist-packages/tags
-nmap <Leader>vn :vsp<cr><C-]>
-nmap <Leader>n <C-]>
-nmap <Leader>vN :vsp<cr>g]
-nmap <Leader>N g]
 
 " Ack.vim, Global search
 Plugin 'mileszs/ack.vim'
@@ -253,21 +252,21 @@ nmap <Leader>a <Plug>(EasyAlign)
 " git diff check
 Plugin 'airblade/vim-gitgutter'
 
-" Vim org-mode
 Plugin 'jceb/vim-orgmode'
-autocmd BufNewFile,BufRead *.org set filetype=org
+augroup filetype_org
+    autocmd!
+    autocmd BufNewFile,BufRead *.org set filetype=org
+augroup END
 
-" Use <C-a> to create the date
 Plugin 'tpope/vim-speeddating'
 
 "Plugin 'python-mode/python-mode'
-"let g:pymode_lint_cwindow = 0
+"let g:pymode_python = 'python3'
 
 Plugin 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'never'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-let g:ale_lint_on_text_changed = 'never'
-let g:syntastic_javascript_checkers = ['eslint']
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
