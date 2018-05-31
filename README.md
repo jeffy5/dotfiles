@@ -38,3 +38,8 @@ alias change=setxkbmap -option "ctrl:swapcaps"
 
 
 ## Zshrc
+
+1. ctags: Used to generate `tags` file. Let vim can jump in each function.
+2. SS: The command for editing the setting of network proxy (Ubuntu Unity)
+3. GOPATH: Setting the gopath
+4. VIMRC: Mark the config file of vim, then I can get vimrc with variable `$VIMRC` in Vim
