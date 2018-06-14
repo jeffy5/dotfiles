@@ -36,6 +36,8 @@ set mps+=（:）
 " iabbrev
 iabbrev ff fsociety
 iabbrev @@ 876531737@qq.com
+iabbrev gh github.com
+iabbrev gw github.com/wjh876531738
 
 " Disable the leader key in insert mode, or there will be a second pause when you
 " press leader key. Use `verbose imap <leader>` to check whick key bind in the
