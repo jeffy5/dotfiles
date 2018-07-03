@@ -59,17 +59,14 @@ inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
  
 " Leader 的按键绑定
-vnoremap <Leader>y "+y
-nnoremap <Leader>p "+p
-nnoremap <Leader><Leader> :
-nnoremap <Leader>ve :vsp $VIMRC<Enter>
-nnoremap <Leader>vr :source $VIMRC<Enter>
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
 " ctags config, code jump
-nnoremap <Leader>vn :vsp<Enter><C-]>
-nnoremap <Leader>n <C-]>
-nnoremap <Leader>vN :vsp<Enter>g]
-nnoremap <Leader>N g]
+nnoremap <leader>t :vsp<Enter><C-]>
+nnoremap <leader>vt <C-]>
+nnoremap <leader>vT :vsp<Enter>g]
+nnoremap <leader>T g]
 
 " Auto cmd group
 augroup filetype_html
@@ -92,7 +89,7 @@ augroup END
 augroup filetype_go
     autocmd!
     autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run %<CR>
-    autocmd BufNewFile,BufRead *.go set tags+=/home/wjh/.go-lib/src/tags
+    autocmd BufNewFile,BufRead *.go set tags+=$GOLIB/src/tags
 augroup END
 
 augroup filetype_javscript
@@ -197,11 +194,11 @@ Plugin 'dyng/ctrlsf.vim'
 
 " 快速跳转
 Plugin 'Lokaltog/vim-easymotion'
-nmap <Leader>j <Plug>(easymotion-j)
-nmap <Leader>k <Plug>(easymotion-k)
-nmap <Leader>h <Plug>(easymotion-linebackward)
-nmap <Leader>l <Plug>(easymotion-lineforward)
-nmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>jj <Plug>(easymotion-j)
+nmap <Leader>jk <Plug>(easymotion-k)
+nmap <Leader>jh <Plug>(easymotion-linebackward)
+nmap <Leader>jl <Plug>(easymotion-lineforward)
+nmap <Leader>jw <Plug>(easymotion-bd-w)
 
 " 代码块自动补全
 Plugin 'SirVer/ultisnips'
@@ -265,11 +262,13 @@ Plugin 'tpope/vim-speeddating'
 "Plugin 'python-mode/python-mode'
 "let g:pymode_python = 'python3'
 
+" 语法检查
 Plugin 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'never'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" jsx
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0    " Allow JSX in normal JS files
