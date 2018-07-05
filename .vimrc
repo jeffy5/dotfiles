@@ -90,6 +90,7 @@ augroup filetype_go
     autocmd!
     autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run %<CR>
     autocmd BufNewFile,BufRead *.go set tags+=$GOLIB/src/tags
+    autocmd BufWritePre,FileWritePre *.go GoImports
 augroup END
 
 augroup filetype_javscript
@@ -272,3 +273,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0    " Allow JSX in normal JS files
+
+" the plugin for go
+Plugin 'fatih/vim-go'
