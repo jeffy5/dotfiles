@@ -71,7 +71,15 @@ nnoremap <leader>T g]
 " Auto cmd group
 augroup filetype_html
     autocmd!
-    autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb,*.vue set tabstop=2 softtabstop=2 shiftwidth=2 
+    autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb set tabstop=2 softtabstop=2 shiftwidth=2 
+    autocmd BufNewFile,BufRead *.html,*.css,*.scss syntax sync fromstart 
+augroup END
+
+augroup filetype_vue
+    autocmd!
+    autocmd BufNewFile,BufRead *.vue,*.wpy set filetype=vue 
+    autocmd BufNewFile,BufRead *.vue,*.wpy syntax sync fromstart
+    autocmd BufNewFile,BufRead *.vue,*.wpy set tabstop=2 softtabstop=2 shiftwidth=2 
 augroup END
 
 augroup filetype_python
@@ -96,12 +104,6 @@ augroup END
 augroup filetype_javscript
     autocmd!
     autocmd BufNewFile,BufRead *.js nmap <leader>r :w<Enter>:!node %<CR>
-augroup END
-
-augroup filetype_vue
-    autocmd!
-    autocmd BufNewFile,BufRead *.vue set filetype=html 
-    autocmd BufNewFile,BufRead *.vue,*.html syntax sync fromstart 
 augroup END
 
 " Vundle管理插件
@@ -184,11 +186,6 @@ let g:indent_guides_guide_size = 1
 " Vue
 Plugin 'posva/vim-vue'
 " 识别vue文件进行高亮
-augroup filetype_vue
-    autocmd!
-    autocmd BufNewFile,BufRead *.vue set filetype=vue 
-    autocmd BufNewFile,BufRead *.vue syntax sync fromstart
-augroup END
 
 " 全局搜索
 Plugin 'dyng/ctrlsf.vim' 

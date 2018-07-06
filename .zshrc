@@ -23,5 +23,5 @@ export GOPATH=$GOLIB
 export GOROOT=/usr/local/go  
 export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
 
-export VIMRC="/home/wjh/.vimrc"
+export VIMRC="/home/wjh/project/dotfiles/.vimrc"
 export TERM=xterm-256color
