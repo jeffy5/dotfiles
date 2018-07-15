@@ -68,8 +68,8 @@ set hlsearch
 set autoindent
 set ruler
 
-" add （） to % match
-set mps+=（:）
+" set python support
+set pythonthreedll=D:\software\python\python37.dll
 
 " iabbrev
 iabbrev ff fsociety
@@ -205,7 +205,7 @@ inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
 " nnoremap <leader>y :let g:ycm_auto_trigger=1<CR>
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = 'D:\software\python\python.exe'
 
 " 重命名文件
 Plugin 'danro/rename.vim'
