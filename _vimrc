@@ -131,7 +131,8 @@ augroup END
 
 augroup filetype_go
     autocmd!
-    autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run %<CR>
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>rr :w<Enter>:GoRun<CR>
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>rt :w<Enter>:GoTest<CR>
     autocmd BufNewFile,BufRead *.go set tags+=$GOLIB/src/tags
     autocmd BufWritePre,FileWritePre *.go GoImports
 augroup END
@@ -240,6 +241,10 @@ Plugin 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" Fix bug: The imp module is deprecated in favour of importlib
+if has('python3')
+  silent! python3 1
+endif
 
 " 自动补全括号, 引号
 Plugin 'jiangmiao/auto-pairs'
