@@ -68,6 +68,15 @@ set hlsearch
 set autoindent
 set ruler
 
+" set python support
+set pythonthreedll=D:\software\python\python37.dll
+
+" iabbrev
+iabbrev ff fsociety
+iabbrev @@ 876531737@qq.com
+iabbrev gh github.com
+iabbrev gw github.com/wjh876531738
+
 " Disable the leader key in insert mode, or there will be a second pause when you
 " press leader key. Use `verbose imap <leader>` to check whick key bind in the
 " insert mode with leader key, just ban it.
@@ -77,59 +86,61 @@ let mapleader=" "
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 nnoremap <C-c> <C-[>
 
-" 括号自动匹配
-"inoremap ( ()<Esc>i
-"inoremap [ []<Esc>i
-"inoremap { {}<Esc>i
-"inoremap ) <c-r>=ClosePair(')')<CR>
-"inoremap ] <c-r>=ClosePair(']')<CR>
-"inoremap } <c-r>=ClosePair('}')<CR>
-"inoremap " <c-r>=QuoteDelim('"')<CR>
-"inoremap ' <c-r>=QuoteDelim("'")<CR>
-"inoremap <TAB> <c-r>=SkipPair()<CR>
-
+" Emacs 的便利按键习惯，insert 模式下的短距离跳转
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-a> <ESC>I
 inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
+ 
+" Leader 的按键绑定
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
-vnoremap <Leader>y "+y
-nmap <Leader>p "+p
-nmap <F2> :!ici <C-R><C-W><CR>
-nmap <Leader><Leader> :
+" ctags config, code jump
+nnoremap <leader>t <C-]>
+nnoremap <leader>T g]
+nnoremap <leader>vt :vsp<Enter><C-]>
+nnoremap <leader>vT :vsp<Enter>g]
 
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb,*.vue set tabstop=2 softtabstop=2 shiftwidth=2 
-autocmd BufNewFile,BufRead *.py nmap <C-c><C-c> :w<Enter>:!python3 %<CR>
-autocmd BufNewFile,BufRead *.rb nmap <C-c><C-c> :w<Enter>:!ruby %<CR>
+" Auto cmd group
+augroup filetype_html
+    autocmd!
+    autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb set tabstop=2 softtabstop=2 shiftwidth=2 
+    autocmd BufNewFile,BufRead *.html,*.css,*.scss syntax sync fromstart 
+augroup END
 
-"function ClosePair(char)
-    "if getline('.')[col('.') - 1] == a:char
-        "return "\<Right>"
-    "else
-        "return a:char
-    "endif
-"endf
+augroup filetype_vue
+    autocmd!
+    autocmd BufNewFile,BufRead *.vue,*.wpy set filetype=vue 
+    autocmd BufNewFile,BufRead *.vue,*.wpy syntax sync fromstart
+    autocmd BufNewFile,BufRead *.vue,*.wpy set tabstop=2 softtabstop=2 shiftwidth=2 
+augroup END
 
-"function QuoteDelim(char)
-    "let line = getline('.')
-    "let col = col('.')
-    "if line[col - 2] == "\\"
-        "return a:char
-    "elseif line[col - 1] == a:char
-        "return "\<Right>"
-    "else
-        "return a:char.a:char."\<Esc>i"
-    "endif
-"endf
+augroup filetype_python
+    autocmd!
+    autocmd BufNewFile,BufRead *.py nnoremap <leader>r :w<Enter>:!python3 %<CR>
+    autocmd BufNewFile,BufRead *.py set tags+=/usr/local/lib/python3.5/dist-packages/tags
+augroup END
 
-"function SkipPair()  
-    "if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'"
-        "return "\<ESC>la"  
-    "else  
-        "return "\t"  
-    "endif  
-"endf
+augroup filetype_ruby
+    autocmd!
+    autocmd BufNewFile,BufRead *.rb nnoremap <leader>r :w<Enter>:!ruby %<CR>
+    autocmd BufNewFile,BufRead *.rb set tags+=/home/wjh/.rvm/gems/ruby-2.3.0/gems/tags
+augroup END
+
+augroup filetype_go
+    autocmd!
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>rr :w<Enter>:GoRun<CR>
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>rt :w<Enter>:GoTest<CR>
+    autocmd BufNewFile,BufRead *.go set tags+=$GOLIB/src/tags
+    autocmd BufWritePre,FileWritePre *.go GoImports
+augroup END
+
+augroup filetype_javscript
+    autocmd!
+    autocmd BufNewFile,BufRead *.js nmap <leader>r :w<Enter>:!node %<CR>
+augroup END
 
 " 插件配置
 filetype off  
@@ -138,20 +149,20 @@ set rtp+=$VIM/vimfiles/bundle/vundle/
 call vundle#rc('$VIM/vimfiles/bundle/')  
 Bundle 'gmarik/vundle'  
 filetype plugin indent on
-
+" Below here to add the vundle what I want
 
 " Emmet html标签快速生成
 Plugin 'mattn/emmet-vim'
 let g:user_emmet_mode = 'i'
 " let g:user_emmet_expandabbr_key = '<C-y><TAB>'
+imap <expr> <C-l> emmet#expandAbbrIntelligent("\<tab>")
 let g:user_emmet_next_key = '<C-d>'
 let g:user_emmet_prev_key = '<C-t>'
 let g:user_emmet_install_global = 1
-imap <expr> <C-f> emmet#expandAbbrIntelligent("\<tab>")
 
 " NERDTree目录树插件
 Plugin 'scrooloose/nerdtree'
-nmap <F4> :NERDTree  <CR>
+nnoremap <F4> :NERDTree<CR>
 let g:NERDTreeWinPos="left"
 let g:NERDTreeWinSize=20
 let g:NERDTreeShowLineNumbers=1
@@ -177,25 +188,25 @@ Plugin 'tpope/vim-rails'
 Plugin 'godlygeek/tabular'
 
 " YouCompleteMe补全
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " YouCompleteMe补全配置
-" let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
+"let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
 " 修改ycm按键
-" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
 " let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " 配置成像一样IDE
-" set completeopt=longest,menu
+set completeopt=longest,menu
 " 退出insert模式后自动隐藏补全提示框
-" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " 回车键选择补全项
-" inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
+inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
 " 禁用补全
 " nnoremap <leader>y :let g:ycm_auto_trigger=1<CR>
 " 注释和字符串中的文字也会被收入补全
-" let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_python_binary_path = 'D:\software\python\python.exe'
 
 " 重命名文件
 Plugin 'danro/rename.vim'
@@ -209,23 +220,20 @@ Plugin 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 
-" Vue高亮
+" Vue
 Plugin 'posva/vim-vue'
-
 " 识别vue文件进行高亮
-autocmd BufNewFile,BufRead *.vue set filetype=vue 
-autocmd FileType vue syntax sync fromstart
 
 " 全局搜索
 Plugin 'dyng/ctrlsf.vim' 
 
 " 快速跳转
 Plugin 'Lokaltog/vim-easymotion'
-nmap <Leader>j <Plug>(easymotion-j)
-nmap <Leader>k <Plug>(easymotion-k)
-nmap <Leader>h <Plug>(easymotion-linebackward)
-nmap <Leader>l <Plug>(easymotion-lineforward)
-nmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>jj <Plug>(easymotion-j)
+nmap <Leader>jk <Plug>(easymotion-k)
+nmap <Leader>jh <Plug>(easymotion-linebackward)
+nmap <Leader>jl <Plug>(easymotion-lineforward)
+nmap <Leader>jw <Plug>(easymotion-bd-w)
 
 " 代码块自动补全
 Plugin 'SirVer/ultisnips'
@@ -233,6 +241,10 @@ Plugin 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" Fix bug: The imp module is deprecated in favour of importlib
+if has('python3')
+  silent! python3 1
+endif
 
 " 自动补全括号, 引号
 Plugin 'jiangmiao/auto-pairs'
@@ -242,7 +254,7 @@ Plugin 'marijnh/tern_for_vim'
 
 " Tagbar
 Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " Powerline
 Plugin 'Lokaltog/vim-powerline'
@@ -250,14 +262,6 @@ set laststatus=2
 
 " Mkdir the dependency directories when you create a file
 Plugin 'pbrisbin/vim-mkdir'
-
-" ctags config, code jump
-autocmd BufNewFile,BufRead *.rb set tags+=/home/wjh/.rvm/gems/ruby-2.3.0/gems/tags
-autocmd BufNewFile,BufRead *.py set tags+=/usr/local/lib/python3.5/dist-packages/tags
-nmap <Leader>vn :vsp<C-]>
-nmap <Leader>n <C-]>
-nmap <Leader>vN :vspg]
-nmap <Leader>N g]
 
 " Ack.vim, Global search
 Plugin 'mileszs/ack.vim'
@@ -282,3 +286,31 @@ let g:ack_use_cword_for_empty_search = 1
 Plugin 'junegunn/vim-easy-align'
 xmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
+
+" git diff check
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'jceb/vim-orgmode'
+augroup filetype_org
+    autocmd!
+    autocmd BufNewFile,BufRead *.org set filetype=org
+augroup END
+
+Plugin 'tpope/vim-speeddating'
+
+"Plugin 'python-mode/python-mode'
+"let g:pymode_python = 'python3'
+
+" 语法检查
+Plugin 'w0rp/ale'
+let g:ale_lint_on_text_changed = 'never'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" jsx
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0    " Allow JSX in normal JS files
+
+" the plugin for go
+Plugin 'fatih/vim-go'

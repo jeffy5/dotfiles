@@ -30,7 +30,7 @@ set nocompatible
 set wildmenu
 set ruler
 
-" % match
+" add （） to % match
 set mps+=（:）
 
 " iabbrev
@@ -63,10 +63,10 @@ vnoremap <leader>y "+y
 nnoremap <leader>p "+p
 
 " ctags config, code jump
-nnoremap <leader>t :vsp<Enter><C-]>
-nnoremap <leader>vt <C-]>
-nnoremap <leader>vT :vsp<Enter>g]
+nnoremap <leader>t <C-]>
 nnoremap <leader>T g]
+nnoremap <leader>vt :vsp<Enter><C-]>
+nnoremap <leader>vT :vsp<Enter>g]
 
 " Auto cmd group
 augroup filetype_html
