@@ -69,7 +69,7 @@ set autoindent
 set ruler
 
 " set python support
-set pythonthreedll=D:\software\python\python37.dll
+set pythonthreedll=C:\Users\Administrator\AppData\Local\Programs\Python\Python37-32\python37.dll
 
 " iabbrev
 iabbrev ff fsociety
@@ -241,6 +241,7 @@ Plugin 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "CustomSnips"]
 " Fix bug: The imp module is deprecated in favour of importlib
 if has('python3')
   silent! python3 1
