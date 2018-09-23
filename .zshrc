@@ -1,3 +1,8 @@
+# Oh-my-zsh theme
+export ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+source $ZSH/oh-my-zsh.sh
+
 # Change Ctrl and Caps
 alias change='setxkbmap -option "ctrl:swapcaps"'
 
