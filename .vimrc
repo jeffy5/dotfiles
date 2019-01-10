@@ -14,7 +14,7 @@ set fileencodings=utf-8
 set termencoding=utf-8
 
 " 解决和tmux的颜色冲突问题
-colorscheme ron
+" colorscheme elflord
 
 " 基本配置
 set nu
@@ -29,6 +29,7 @@ set incsearch
 set nocompatible
 set wildmenu
 set ruler
+set cursorline
 
 " add （） to % match
 set mps+=（:）
@@ -96,7 +97,7 @@ augroup END
 
 augroup filetype_go
     autocmd!
-    autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run %<CR>
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run main.go<CR>
     autocmd BufNewFile,BufRead *.go set tags+=$GOLIB/src/tags
     autocmd BufWritePre,FileWritePre *.go GoImports
 augroup END
@@ -151,25 +152,25 @@ Plugin 'tpope/vim-rails'
 Plugin 'godlygeek/tabular'
 
 " YouCompleteMe补全
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " YouCompleteMe补全配置
 "let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
 " 修改ycm按键
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-" 配置成像一样IDE
-set completeopt=longest,menu
-" 退出insert模式后自动隐藏补全提示框
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-" 回车键选择补全项
-inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
-" 禁用补全
-" nnoremap <leader>y :let g:ycm_auto_trigger=1<CR>
-" 注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_python_binary_path = '/usr/bin/python3'
+" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<Up>']
+" " let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" " 配置成像一样IDE
+" set completeopt=longest,menu
+" " 退出insert模式后自动隐藏补全提示框
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" " 回车键选择补全项
+" inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
+" " 禁用补全
+" " nnoremap <leader>y :let g:ycm_auto_trigger=1<CR>
+" " 注释和字符串中的文字也会被收入补全
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_python_binary_path = '/usr/bin/python3'
 
 " 重命名文件
 Plugin 'danro/rename.vim'
@@ -273,3 +274,11 @@ let g:jsx_ext_required = 0    " Allow JSX in normal JS files
 
 " the plugin for go
 Plugin 'fatih/vim-go'
+
+" allomancer theme
+Plugin 'Nequo/vim-allomancer'
+set termguicolors "Remove this in urxvt
+colorscheme allomancer
+
+" toml syntax
+Plugin 'cespare/vim-toml'
