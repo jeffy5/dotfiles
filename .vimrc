@@ -31,6 +31,9 @@ set wildmenu
 set ruler
 set cursorline
 
+highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+
 " add （） to % match
 set mps+=（:）
 
@@ -40,28 +43,61 @@ iabbrev @@ 876531737@qq.com
 iabbrev gh github.com
 iabbrev gw github.com/wjh876531738
 
-" Disable the leader key in insert mode, or there will be a second pause when you
-" press leader key. Use `verbose imap <leader>` to check whick key bind in the
-" insert mode with leader key, just ban it.
-let mapleader=" "
-
 " 清屏并去掉高亮
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " 一些基本的映射
 nnoremap <F2> :!ici <C-R><C-W><CR>
-nnoremap <C-c> <C-[>
 
-" Emacs 的便利按键习惯，insert 模式下的短距离跳转
+" Disable the leader key in insert mode, or there will be a second pause when you
+" press leader key. Use `verbose imap <leader>` to check whick key bind in the
+" insert mode with leader key, just ban it.
+"
+" Setting <Space> as leader key 
+let mapleader=" "
+inoremap <C-c> <C-[>
+
+" " One handed coding
+" map <space><space> :
+" nnoremap <C-e> <C-u>
+" nnoremap <C-c> :w<CR>
+" nnoremap <C-c><C-c> :wqa<CR>
+" 
+" imap <expr> <leader>tt emmet#expandAbbrIntelligent("\<tab>")
+" inoremap <C-c> <C-[>
+" inoremap <leader>ad +
+" inoremap <leader>an &
+" inoremap <leader>st *
+" 
+" inoremap <leader>u <C-[>gU<RIGHT>a
+" inoremap <leader>uu <C-[>bgUwea
+" 
+" inoremap <leader>12 ()<LEFT>
+" inoremap <leader>11 -
+" inoremap <leader>22 =
+" 
+" inoremap <leader>qw {}<LEFT>
+" inoremap <leader>wq []<LEFT>
+" 
+" inoremap <leader>as ""<LEFT>
+" inoremap <leader>sa ''<LEFT>
+" inoremap <leader>aa ;
+" inoremap <leader>ss :
+" inoremap <leader>zx <><LEFT>
+" inoremap <leader>zz ,
+" inoremap <leader>xx .
+" inoremap <leader>cc /
+
+" Learn from Emacs，short distance moving in insert mode
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-a> <ESC>I
 inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
- 
-" Leader 的按键绑定
-vnoremap <leader>y "+y
-nnoremap <leader>p "+p
+
+" " Leader 的按键绑定
+" vnoremap <leader>y "+y
+" nnoremap <leader>p "+p
 
 " ctags config, code jump
 nnoremap <leader>t <C-]>
@@ -74,6 +110,11 @@ augroup filetype_html
     autocmd!
     autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.rb set tabstop=2 softtabstop=2 shiftwidth=2 
     autocmd BufNewFile,BufRead *.html,*.css,*.scss syntax sync fromstart 
+augroup END
+
+augroup filetype_yaml
+    autocmd!
+    autocmd BufNewFile,BufRead *.yaml set tabstop=2 softtabstop=2 shiftwidth=2 
 augroup END
 
 augroup filetype_vue
@@ -98,6 +139,7 @@ augroup END
 augroup filetype_go
     autocmd!
     autocmd BufNewFile,BufRead *.go nnoremap <leader>r :w<Enter>:!go run main.go<CR>
+    autocmd BufNewFile,BufRead *.go nnoremap <leader>u :w<Enter>:!go test -v ./...<CR>
     autocmd BufNewFile,BufRead *.go set tags+=$GOLIB/src/tags
     autocmd BufWritePre,FileWritePre *.go GoImports
 augroup END
@@ -105,6 +147,18 @@ augroup END
 augroup filetype_javscript
     autocmd!
     autocmd BufNewFile,BufRead *.js nmap <leader>r :w<Enter>:!node %<CR>
+    autocmd BufNewFile,BufRead *.js nmap <leader>u :w<Enter>:!npm run test-local<CR>
+augroup END
+
+augroup filetype_java
+    autocmd!
+    autocmd BufNewFile,BufRead *.java setlocal omnifunc=javacomplete#Complete
+    autocmd BufWritePre,FileWritePre *.java call javacomplete#AddImport()
+augroup END
+
+augroup filetype_kotlin
+    autocmd!
+    autocmd BufNewFile,BufRead *.kt set filetype=kotlin
 augroup END
 
 " Vundle管理插件
@@ -119,7 +173,7 @@ filetype plugin indent on
 Plugin 'mattn/emmet-vim'
 let g:user_emmet_mode = 'i'
 " let g:user_emmet_expandabbr_key = '<C-y><TAB>'
-imap <expr> <C-l> emmet#expandAbbrIntelligent("\<tab>")
+" imap <expr> <C-l> emmet#expandAbbrIntelligent("\<tab>")
 let g:user_emmet_next_key = '<C-d>'
 let g:user_emmet_prev_key = '<C-t>'
 let g:user_emmet_install_global = 1
@@ -177,6 +231,7 @@ Plugin 'danro/rename.vim'
 
 " Ctrlp 文件模糊查找
 Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<SPACE>f'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/dist/*
 
 " 缩进管理 <Leader>ig 快速切换开启状态
@@ -193,10 +248,11 @@ Plugin 'dyng/ctrlsf.vim'
 
 " 快速跳转
 Plugin 'Lokaltog/vim-easymotion'
-nmap <Leader>jj <Plug>(easymotion-j)
-nmap <Leader>jk <Plug>(easymotion-k)
-nmap <Leader>jh <Plug>(easymotion-linebackward)
-nmap <Leader>jl <Plug>(easymotion-lineforward)
+nmap <Leader>j <Plug>(easymotion-prefix)
+" nmap <Leader>jj <Plug>(easymotion-j)
+" nmap <Leader>jk <Plug>(easymotion-k)
+" nmap <Leader>jh <Plug>(easymotion-linebackward)
+" nmap <Leader>jl <Plug>(easymotion-lineforward)
 nmap <Leader>jw <Plug>(easymotion-bd-w)
 
 " 代码块自动补全
@@ -282,3 +338,17 @@ colorscheme allomancer
 
 " toml syntax
 Plugin 'cespare/vim-toml'
+
+" Docker file
+Plugin 'ekalinin/Dockerfile.vim'
+
+" Carbon show
+Plugin 'kristijanhusak/vim-carbon-now-sh'
+vnoremap <F5> :CarbonNowSh<CR>
+
+" Java
+Plugin 'artur-shaik/vim-javacomplete2'
+let g:JavaComplete_EnableDefaultMappings = 0
+
+" Kotlin
+Plugin 'udalov/kotlin-vim'
