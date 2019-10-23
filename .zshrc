@@ -31,6 +31,7 @@ function ssStop() {
 export GOLIB=$HOME/project/go
 export GOPATH=$GOLIB
 export GOROOT=/usr/local/go
+export GOPROXY=https://goproxy.cn
 export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
 
 # Vim ENV
