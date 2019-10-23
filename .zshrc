@@ -1,6 +1,5 @@
 # Oh-my-zsh theme
-export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="robbyrussell"
+export ZSH=$HOME/.oh-my-zsh ZSH_THEME="robbyrussell"
 source $ZSH/oh-my-zsh.sh
 
 # Import plugins
@@ -15,6 +14,7 @@ alias tspy='cd /usr/local/lib/python3.5/dist-packages && sudo ctags -R *'
 alias tsgo='cd $GOLIB/src && ctags -R *'
 alias ts='ctags -R *'
 alias gogo='cd $HOME/project/go/src/github.com/xr-hui/'
+alias vim='/usr/local/bin/vim'
 
 # Start shadowsocks
 function ssStart() {
@@ -53,3 +53,5 @@ export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 
 # Auto jump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
+export LC_ALL=en_US.UTF-8
