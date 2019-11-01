@@ -96,8 +96,8 @@ inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
 
 " " Leader 的按键绑定
-" vnoremap <leader>y "+y
-" nnoremap <leader>p "+p
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
 " ctags config, code jump
 nnoremap <leader>t <C-]>

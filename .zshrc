@@ -32,6 +32,7 @@ export GOLIB=$HOME/project/go
 export GOPATH=$GOLIB
 export GOROOT=/usr/local/go
 export GOPROXY=https://goproxy.cn
+export GO111MODULE=on
 export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
 
 # Vim ENV
