@@ -52,6 +52,9 @@ export PATH=$PATH:$HOME/Library/Android/sdk/ndk-bundle
 export A_NDK_ROOT=$HOME/Library/Android/sdk/ndk-bundle
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+
 # Auto jump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
