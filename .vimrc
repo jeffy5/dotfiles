@@ -268,7 +268,7 @@ Plug 'dyng/ctrlsf.vim'
 
 " 快速跳转
 Plug 'Lokaltog/vim-easymotion'
-" nmap <Leader>j <Plug>(easymotion-prefix)
+nmap <Leader>j <Plug>(easymotion-prefix)
 nmap <Leader>jj <Plug>(easymotion-j)
 nmap <Leader>jk <Plug>(easymotion-k)
 nmap <Leader>jh <Plug>(easymotion-linebackward)
