@@ -8,7 +8,7 @@ plugins=(git autojump)
 # Change Ctrl and Caps
 alias change='setxkbmap -option "ctrl:swapcaps"'
 
-# ctags
+# Generate ctags for specific language
 alias tsrb='cd $HOME/.rvm/gems/ruby-2.3.0/gems && ctags -R *'
 alias tspy='cd /usr/local/lib/python3.5/dist-packages && sudo ctags -R *'
 alias tsgo='cd $GOLIB/src && ctags -R *'
@@ -16,18 +16,18 @@ alias ts='ctags -R *'
 alias gogo='cd $HOME/project/go/src/github.com/xr-hui/'
 # alias vim='/usr/local/bin/vim'
 
-# Start shadowsocks
+# Enable gnome's proxy setting and start shadowsocks
 function ssStart() {
     sudo gsettings set org.gnome.system.proxy mode 'manual'
     sslocal -c ~/config/shadowsocks.json
 }
 
-# Stop shadowsocks
+# Disable gnome's proxy setting and start shadowsocks
 function ssStop() {
     sudo gsettings set org.gnome.system.proxy mode 'none'
 }
 
-# Go ENV
+# Go env
 export GOLIB=$HOME/project/go
 export GOPATH=$GOLIB
 export GOROOT=/usr/local/share/go
@@ -35,18 +35,20 @@ export GOPROXY=https://goproxy.cn
 export GO111MODULE=on
 export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
 
-# Vim ENV
+# Vim env
 export VIMRC=$HOME/project/dotfiles/.vimrc
 export TERM=xterm-256color
 
-# Server
+# Server alias command
 alias home='ssh wjh@wujianhui.com'
 
+# Nvm manger node version
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+# Android env
 # android NDK Config
 # export A_NDK_ROOT=$HOME/Library/Android/sdk/ndk-bundle
 # export PATH=$PATH:$A_NDK_ROOT
