@@ -29,6 +29,13 @@ set nocompatible
 set wildmenu
 set ruler
 set cursorline
+" set spell spelllang=en_us,cjk
+
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+set termguicolors
+set background=dark
+set term=xterm-256color
 
 highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
@@ -242,7 +249,7 @@ inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_filetype_blacklist = { 'dart': 1 }
+let g:ycm_filetype_blacklist = { 'dart': 1, 'sql': 1 }
 
 " 重命名文件
 Plug 'danro/rename.vim'
@@ -303,7 +310,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'mileszs/ack.vim'
 "<Leader>s进行搜索，同时不自动打开第一个匹配的文件"
 nnoremap <Leader>s :Ack!<Space>
-"调用ag进行搜索
+" 调用ag进行搜索
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -353,7 +360,9 @@ Plug 'fatih/vim-go'
 
 " allomancer theme
 Plug 'Nequo/vim-allomancer'
-set termguicolors "Remove this in urxvt
+set termguicolors " Remove this in urxvt
+
+Plug 'altercation/vim-colors-solarized'
 
 " toml syntax
 Plug 'cespare/vim-toml'
@@ -394,18 +403,18 @@ endfunction
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " coc-nvim 回车补全
-" if has('patch8.1.1068')
-"   " Use `complete_info` if your (Neo)Vim version supports it.
-"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-" else
-"   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" endif
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 nnoremap <leader>vt :vsp<Enter>:call CocAction("jumpDefinition")<Enter>
 
 nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 
-call plug#end()
+vmap zg <Plug>(coc-codeaction-selected)
 
-colorscheme allomancer
+call plug#end()

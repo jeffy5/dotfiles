@@ -18,26 +18,27 @@ alias gogo='cd $HOME/project/go/src/github.com/xr-hui/'
 
 # Start shadowsocks
 function ssStart() {
-    sudo gsettings set org.gnome.system.proxy mode 'manual'
-    sslocal -c ~/config/shadowsocks.json
+    gsettings set org.gnome.system.proxy mode 'manual'
+    ~/software/v2ray/v2ray
 }
 
 # Stop shadowsocks
 function ssStop() {
-    sudo gsettings set org.gnome.system.proxy mode 'none'
+    gsettings set org.gnome.system.proxy mode 'none'
 }
 
 # Go ENV
 export GOLIB=$HOME/project/go
 export GOPATH=$GOLIB
-export GOROOT=/usr/local/share/go
+# export GOROOT=/usr/local/share/go
 export GOPROXY=https://goproxy.cn
 export GO111MODULE=on
-export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
+# export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
+export PATH=$PATH:$GOLIB/bin
 
 # Vim ENV
 export VIMRC=$HOME/project/dotfiles/.vimrc
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 # Server
 alias home='ssh wjh@wujianhui.com'
@@ -50,9 +51,14 @@ export NVM_DIR="$HOME/.nvm"
 # android NDK Config
 # export A_NDK_ROOT=$HOME/Library/Android/sdk/ndk-bundle
 # export PATH=$PATH:$A_NDK_ROOT
+export ANDROID_HOME=$HOME/Android/Sdk
+export JAVA_HOME=/home/jeffrey/software/android-studio/jre
 export PATH=$PATH:$HOME/Android/Sdk/platform-tools
+export PATH=$PATH:$JAVA_HOME/bin
 
-export PATH=$PATH:$HOME/software/flutter/bin
+# Flutter env
+export FLUTTER_CHANNEL="master"
+export PATH=$PATH:/usr/local/share/flutter_$FLUTTER_CHANNEL/bin
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 
@@ -60,4 +66,13 @@ export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 # [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 [[ -s /usr/share/autojump/autojump.sh ]] && . /usr/share/autojump/autojump.sh
 
+# export http_proxy=http://127.0.0.1:1087
+# export https_proxy=$http_proxy
+
+# Esp
+export IDF_PATH=$HOME/project/esp/ESP8266_RTOS_SDK
+
 export LC_ALL=en_US.UTF-8
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
