@@ -39,6 +39,8 @@ set term=xterm-256color
 
 highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+highlight Pmenu ctermbg=grey guibg=#252526
+highlight PmenuSel ctermbg=grey guibg=#017BCD
 
 " add （） to % match
 set mps+=（:）
@@ -100,6 +102,11 @@ inoremap <C-b> <Left>
 inoremap <C-a> <ESC>I
 inoremap <C-e> <ESC>A
 inoremap <C-d> <DEL>
+
+" Toggle the cursor line
+nnoremap <leader>hl :set cursorline! <CR>
+" Toggle the cursor column
+nnoremap <leader>hc :set cursorcolumn! <CR>
 
 " " Leader 的按键绑定
 vnoremap <leader>y "+y
