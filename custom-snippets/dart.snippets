@@ -1,0 +1,221 @@
+snippet im "Import material"
+import 'package:flutter/material.dart';
+endsnippet
+
+snippet slw "Stateless widget"
+class ${1} extends StatelessWidget {
+
+  const $1({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ${2:return Scaffold(${3});}
+  }
+
+}
+endsnippet
+
+snippet sfw "Stateful widget"
+class ${1} extends StatefulWidget {
+
+  const $1({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => $1State();
+
+}
+
+class $1State extends State<$1> {
+
+  @override
+  Widget build(BuildContext context) {
+    ${2:return Scaffold(${3});}
+  }
+
+}
+endsnippet
+
+snippet sw "Screen util set width"
+${1}.w${2}
+endsnippet
+
+snippet cr "Color"
+Color(0xFF${1})
+endsnippet
+
+snippet tx "Text"
+Text(
+  "${1}",
+  style: TextStyle(
+    color: ${2:Colors.black},
+    fontWeight: FontWeight.w500,
+    fontSize: ScreenUtil().setWidth(${3:14.w}),
+  ),
+),
+endsnippet
+
+snippet rtx "RichText"
+RichText(
+  text: TextSpan(
+    children: <InlineSpan>[
+      TextSpan(
+        text: "${1}",
+        style: TextStyle(
+          color: ${2:Colors.black},
+          fontWeight: FontWeight.w500,
+          fontSize: ScreenUtil().setWidth(${3:14.w}),
+        ),
+      ),
+    ],
+  ),
+),
+endsnippet
+
+snippet ts "TextStyle"
+style: TextStyle(
+  color: ${1:Colors.black},
+  fontWeight: FontWeight.w500,
+  fontSize: ScreenUtil().setWidth(${2:14}),
+),
+endsnippet
+
+snippet is "Initialize state"
+@override
+void initState() {
+  super.initState();
+
+  ${1}
+}
+endsnippet
+
+snippet dis "Dispose"
+@override
+void dispose() {
+  ${1}
+
+  super.dispose();
+}
+endsnippet
+
+snippet build "BuildContext"
+@override
+Widget build(BuildContext context) {
+  ${1:return Container(${2});}
+}
+endsnippet
+
+snippet bf "Build widget function"
+Widget build${1}() {
+  ${2:return Container(${3});}
+}
+endsnippet
+
+snippet br "BorderRadius"
+borderRadius: BorderRadius.circular(${1}),
+endsnippet
+
+snippet bro "BorderRadius only"
+borderRadius: BorderRadius.only(
+  topLeft: Radius.circular(${1}),
+  topRight: Radius.circular($1),
+  bottomLeft: Radius.circular($1),
+  bottomRight: Radius.circular($1),
+),
+endsnippet
+
+snippet bs "BoxShadow"
+boxShadow: <BoxShadow>[
+  BoxShadow(
+    offset: Offset(${1}, ${2}),
+    blurRadius: ${3},
+    color: Color(0xFF${4}),
+  ),
+],
+endsnippet
+
+snippet lb "ListView builder"
+ListView.builder(
+  itemCount: ${1},
+  itemBuilder: (context, index) {
+    ${2}
+  },
+  separatorBuilder: (context, index) {
+    return SizedBox(height: ${3});
+  },
+),
+endsnippet
+
+snippet ls "ListView separated builder"
+child: ListView.separated(
+  itemCount: ${1},
+  itemBuilder: (context, index) {
+    ${2}
+  },
+  separatorBuilder: (context, index) {
+    return SizedBox(height: ${3});
+  },
+),
+endsnippet
+
+snippet ic "Icon"
+Icon(
+  Icons.${1},
+  size: ${2},
+  color: ${3},
+),
+endsnippet
+
+snippet sf "Scaffold"
+return Scaffold(
+  backgroundColor: Colors.white,
+  appBar: AppBar(
+    elevation: ${1:1.0},
+    backgroundColor: Colors.white,
+    iconTheme: IconThemeData(color: Colors.black),
+    title: Text(
+      ${2},
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: ScreenUtil().setWidth(16),
+      ),
+    ),
+  ),
+  body: SafeArea(
+    child: ${2:Container(${3})},
+  ),
+);
+endsnippet
+
+snippet dr "Decoration"
+decoration: BoxDecoration(
+  ${1}
+),
+endsnippet
+
+snippet pds "Padding symmetric"
+padding: EdgeInsets.symmetric(
+  vertical: ${1},
+  horizontal: ${2},
+),
+endsnippet
+
+snippet pdo "Padding only"
+padding: EdgeInsets.only(
+  left: ${1},
+  top: ${2},
+  right: ${3},
+  bottom: ${4},
+),
+endsnippet
+
+snippet sbw "SizedBox with width"
+SizedBox(width: ${1}),
+endsnippet
+
+snippet sbh "SizedBox with height"
+SizedBox(height: ${1}),
+endsnippet

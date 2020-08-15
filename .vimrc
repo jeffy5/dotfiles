@@ -295,7 +295,7 @@ Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "c"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom-snippets"]
 " 自动补全括号, 引号
 Plug 'jiangmiao/auto-pairs'
 
