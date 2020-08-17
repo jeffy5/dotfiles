@@ -53,7 +53,7 @@ Text(
   style: TextStyle(
     color: ${2:Colors.black},
     fontWeight: FontWeight.w500,
-    fontSize: ScreenUtil().setWidth(${3:14.w}),
+    fontSize: ${3:14.w},
   ),
 ),
 endsnippet
@@ -67,7 +67,7 @@ RichText(
         style: TextStyle(
           color: ${2:Colors.black},
           fontWeight: FontWeight.w500,
-          fontSize: ScreenUtil().setWidth(${3:14.w}),
+          fontSize: ${3:14.w},
         ),
       ),
     ],
@@ -79,7 +79,7 @@ snippet ts "TextStyle"
 style: TextStyle(
   color: ${1:Colors.black},
   fontWeight: FontWeight.w500,
-  fontSize: ScreenUtil().setWidth(${2:14}),
+  fontSize: ${2:14.w},
 ),
 endsnippet
 
@@ -143,9 +143,6 @@ ListView.builder(
   itemBuilder: (context, index) {
     ${2}
   },
-  separatorBuilder: (context, index) {
-    return SizedBox(height: ${3});
-  },
 ),
 endsnippet
 
@@ -180,7 +177,7 @@ return Scaffold(
       ${2},
       style: TextStyle(
         color: Colors.black,
-        fontSize: ScreenUtil().setWidth(16),
+        fontSize: 16.w,
       ),
     ),
   ),
