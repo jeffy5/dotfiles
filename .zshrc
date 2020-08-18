@@ -51,13 +51,13 @@ export NVM_DIR="$HOME/.nvm"
 # android NDK Config
 # export A_NDK_ROOT=$HOME/Library/Android/sdk/ndk-bundle
 # export PATH=$PATH:$A_NDK_ROOT
-export ANDROID_HOME=$HOME/Android/Sdk
-export JAVA_HOME=/home/jeffrey/software/android-studio/jre
-export PATH=$PATH:$HOME/Android/Sdk/platform-tools
+export ANDROID_HOME=$HOME/.android
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$JAVA_HOME/bin
 
 # Flutter env
-export FLUTTER_CHANNEL="master"
+export FLUTTER_CHANNEL="stable"
 export PATH=$PATH:/usr/local/share/flutter_$FLUTTER_CHANNEL/bin
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn

@@ -236,27 +236,27 @@ Plug 'tpope/vim-rails'
 " 代码对齐
 Plug 'godlygeek/tabular'
 
-" YouCompleteMe补全
-Plug 'Valloric/YouCompleteMe'
-
-" YouCompleteMe补全配置
-"let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
-" 修改ycm按键
-let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-" 配置成像一样IDE
-set completeopt=longest,menu
-" 退出insert模式后自动隐藏补全提示框
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-" 回车键选择补全项
-inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
-" 禁用补全
-" nnoremap <leader>y :let g:ycm_auto_trigger=1<CR>
-" 注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_filetype_blacklist = { 'dart': 1, 'sql': 1 }
+" " YouCompleteMe补全
+" Plug 'Valloric/YouCompleteMe'
+" 
+" " YouCompleteMe补全配置
+" "let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_global_ycm_extra_conf'
+" " 修改ycm按键
+" let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<Up>']
+" let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" " 配置成像一样IDE
+" set completeopt=longest,menu
+" " 退出insert模式后自动隐藏补全提示框
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" " 回车键选择补全项
+" inoremap <expr> <CR>  pumvisible() ? "\<C-y>\<C-o>:pclose\<CR>\<C-o>l" : "\<CR>"
+" " 禁用补全
+" " nnoremap <leader>y :let g:ycm_auto_trigger=1<CR>
+" " 注释和字符串中的文字也会被收入补全
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_python_binary_path = '/usr/bin/python3'
+" let g:ycm_filetype_blacklist = { 'dart': 1, 'sql': 1 }
 
 " 重命名文件
 Plug 'danro/rename.vim'
