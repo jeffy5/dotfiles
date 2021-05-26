@@ -14,6 +14,7 @@ alias tspy='cd /usr/local/lib/python3.5/dist-packages && sudo ctags -R *'
 alias tsgo='cd $GOLIB/src && ctags -R *'
 alias ts='ctags -R *'
 alias gogo='cd $HOME/project/go/src/github.com/xr-hui/'
+alias swagger="docker run --rm -it -e GOPATH=$HOME/go:/go -v $GOPATH:$HOME/go -w $(pwd) quay.io/goswagger/swagger"
 # alias vim='/usr/local/bin/vim'
 
 # Start shadowsocks
@@ -30,11 +31,10 @@ function ssStop() {
 # Go ENV
 export GOLIB=$HOME/project/go
 export GOPATH=$GOLIB
-# export GOROOT=/usr/local/share/go
+export GOROOT=/usr/local/go
 export GOPROXY=https://goproxy.cn
 export GO111MODULE=on
-# export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
-export PATH=$PATH:$GOLIB/bin
+export PATH=$PATH:$GOROOT/bin:$GOLIB/bin
 
 # Vim ENV
 export VIMRC=$HOME/project/dotfiles/.vimrc
@@ -48,11 +48,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-# android NDK Config
-# export A_NDK_ROOT=$HOME/Library/Android/sdk/ndk-bundle
+# Android sdk config
 # export PATH=$PATH:$A_NDK_ROOT
-export ANDROID_HOME=$HOME/.android
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export ANDROID_HOME=$HOME/.android
+export A_NDK_ROOT=$$ANDROID_HOME/ndk-bundle
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$JAVA_HOME/bin
 
@@ -76,3 +76,14 @@ export LC_ALL=en_US.UTF-8
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+export PATH=$PATH:$HOME/software/esptool
+
+export PATH=$PATH:$HOME/.local/bin
+
+# Anaconda
+export PATH=$PATH:/opt/anaconda/bin
+
+# Vulkan
+export VULKAN_SDK=$HOME/software/vulkan/x86_64
+export Vulkan_DIR=$VULKAN_SDK
