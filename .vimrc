@@ -267,6 +267,7 @@ let g:ctrlp_map = '<SPACE>f'
 " TODO 根据不同的编程语言设置不同的 wildignore
 " set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/dist/*,*/target/*,*/lib/*,*jnilibs/*,*/build/*
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/dist/*,*/target/*,*jnilibs/*,*/build/*
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " 缩进管理 <Leader>ig 快速切换开启状态
 Plug 'nathanaelkane/vim-indent-guides'
