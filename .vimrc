@@ -402,6 +402,8 @@ let g:dart_style_guide = 2
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'davidhalter/jedi-vim'
+
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

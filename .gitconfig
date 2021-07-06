@@ -1,0 +1,11 @@
+[core]
+    editor=vim
+[user]
+	email = xr-hui@qq.com
+	name = Jeffrey Wu
+[alias]
+	lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[http]
+	proxy = socks5://127.0.0.1:1080
+[https]
+	proxy = socks5://127.0.0.1:1080
