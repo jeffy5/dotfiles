@@ -19,6 +19,9 @@
 "     - vim-multiple-cursors
 "     - vim-airline
 "     - ack.vim
+"     - vim-vue
+"     - vim-javascript
+"     - vim-go
 "     - coc.nvim
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,6 +98,7 @@ Plug 'jiangmiao/auto-pairs'
 " Ultisnips
 "   Snippet tools
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -175,8 +179,29 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-vue
+"   vim vue
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'posva/vim-vue'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-javascript
+"   vim javascript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'pangloss/vim-javascript'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-go
+"   vim go
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'fatih/vim-go'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc.nvim
-"   Global search
+"   coc nvim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
