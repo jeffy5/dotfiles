@@ -66,8 +66,7 @@ augroup END
 
 augroup filetype_dart
     autocmd!
-    autocmd BufNewFile,BufRead *.dart set filetype=dart
-    autocmd BufNewFile,BufRead *.dart set tabstop=2 softtabstop=2 shiftwidth=2 
+    autocmd BufRead,BufNewFile,BufEnter *.dart UltiSnipsAddFiletypes dart-flutter
 augroup END
 
 augroup filetype_typescript
