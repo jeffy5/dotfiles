@@ -34,7 +34,7 @@ type ${1}Repo struct {
 	log *log.Helper
 }
 
-func New$1Repo(data *Data, logger log.Logger) biz.${2}Repo {
+func New$2Repo(data *Data, logger log.Logger) biz.${2}Repo {
 	return &$1Repo{
 		data: data,
 		log:  log.NewHelper(log.With(logger, "module", "data/${3}")),
