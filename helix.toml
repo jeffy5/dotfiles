@@ -1,0 +1,25 @@
+theme = "github_dark_high_contrast"
+
+[editor]
+true-color = true
+
+[editor.search]
+smart-case = false
+
+[keys.normal]
+# ";" = "repeat_last_motion"
+"^" = "goto_line_start"
+"$" = "goto_line_end"
+G = "goto_last_line"
+
+[keys.insert]
+C-c = "normal_mode"
+C-a = "goto_line_start"
+C-e = "goto_line_end_newline"
+C-f = "move_char_right"
+C-b = "move_char_left"
+C-p = "move_line_up"
+C-n = "move_line_down"
+
+[keys.select]
+C-c = "normal_mode"

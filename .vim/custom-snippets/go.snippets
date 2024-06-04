@@ -8,3 +8,36 @@ if err != nil {
 }
 ${2}
 endsnippet
+
+snippet kbiz "Kratos business layer"
+type ${1}Repo interface {
+}
+
+type $1Usecase struct {
+	repo $1Repo
+	log *log.Helper
+}
+
+func New$1Usecase(repo $1Repo, logger log.Logger) *$1Usecase {
+	return &$1Usecase{
+		repo: repo,
+		log:  log.NewHelper(log.With(logger, "module", "usecase/${2}")),
+	}
+}
+endsnippet
+
+snippet kdata "Kratos data layer"
+var _ biz.$2Repo = (*$1Repo)(nil)
+
+type ${1}Repo struct {
+	data *Data
+	log *log.Helper
+}
+
+func New$1Repo(data *Data, logger log.Logger) biz.${2}Repo {
+	return &$1Repo{
+		data: data,
+		log:  log.NewHelper(log.With(logger, "module", "data/${3}")),
+	}
+}
+endsnippet
